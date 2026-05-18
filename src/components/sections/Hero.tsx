@@ -216,7 +216,9 @@ export function Hero() {
 
           <div className="hero-cta col-span-12 flex flex-wrap items-center gap-3 md:col-span-4 md:justify-end">
             <a
-              href="#proyectos"
+              href="https://github.com/Hugo332"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-primary px-6 py-3 text-sm font-medium"
             >
               <span>{t(HERO_I18N.viewWork)}</span>
