@@ -1,0 +1,255 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+
+  /* Modern tech tokens — exposed as CSS vars for use outside Tailwind */
+  --surface: #08080a;
+  --surface-raised: #101013;
+  --surface-sunken: #050507;
+  --surface-hover: #16161a;
+  --fg: #fafafa;
+  --fg-muted: #a1a1aa;
+  --fg-subtle: #71717a;
+  --accent: #bef264;
+  --accent-bright: #d9f99d;
+  --accent-dim: #84cc16;
+  --rule: #1a1a1d;
+}
+
+html,
+body {
+  background-color: var(--surface);
+  color: var(--fg);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01", "ss02", "cv01", "cv02", "tnum";
+}
+
+/* Subtle ambient — a single low-amplitude radial wash, no grain. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      60% 50% at 50% 0%,
+      rgba(190, 242, 100, 0.04),
+      transparent 70%
+    );
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+::selection {
+  background-color: rgba(190, 242, 100, 0.25);
+  color: #ffffff;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Tech utilities
+   ───────────────────────────────────────────────────────────────────── */
+
+/* Mono label — used for section tags, version stamps, technical metadata */
+.mono-tag {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem; /* 11px */
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+  line-height: 1;
+}
+
+/* Hairline divider */
+.rule-x {
+  height: 1px;
+  width: 100%;
+  background-color: var(--rule);
+}
+
+/* Status indicator — green dot + label, used for "Available", "Online", etc. */
+.status-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.status-dot::before {
+  content: "";
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+  animation: pulse_dot 2s ease-in-out infinite;
+}
+
+/* Subtle dot grid background */
+.bg-grid {
+  background-image: radial-gradient(
+      circle at 1px 1px,
+      rgba(250, 250, 250, 0.05) 1px,
+      transparent 0
+    );
+  background-size: 32px 32px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Primary button — filled accent, technical
+   ───────────────────────────────────────────────────────────────────── */
+
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--accent);
+  color: var(--surface);
+  border: 1px solid var(--accent);
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: var(--accent-bright);
+  border-color: var(--accent-bright);
+}
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+/* Secondary — outlined hairline */
+.btn-secondary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--fg);
+  border: 1px solid var(--rule);
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+}
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: rgba(190, 242, 100, 0.04);
+}
+.btn-secondary:active {
+  transform: translateY(1px);
+}
+
+/* Ghost link — text + arrow, hover underline */
+.link-ghost {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--fg);
+  transition: color 0.2s ease;
+}
+.link-ghost::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.3s ease;
+}
+.link-ghost:hover,
+.link-ghost:focus-visible {
+  color: var(--accent);
+}
+.link-ghost:hover::after,
+.link-ghost:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Legacy button shims (kept so orphaned UI primitives don't break)
+   ───────────────────────────────────────────────────────────────────── */
+
+.btn-fill {
+  background-color: var(--accent);
+  color: var(--surface);
+  transition: background-color 0.2s ease;
+}
+.btn-fill:hover { background-color: var(--accent-bright); }
+.btn-outline {
+  background-color: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.btn-outline:hover { background-color: var(--accent); color: var(--surface); }
+.btn-editorial { /* alias for .btn-secondary */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--fg);
+  border: 1px solid var(--rule);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.btn-editorial:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ─────────────────────────────────────────────────────────────────────
+   Section helpers
+   ───────────────────────────────────────────────────────────────────── */
+
+.container-x {
+  @apply mx-auto w-full max-w-6xl px-5 md:px-8;
+}
+
+/* Reveal initial state — GSAP transitions to visible via autoAlpha */
+.reveal {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(24px);
+  will-change: opacity, transform;
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+}
+
+/* ── Legacy editorial shims (so old class names don't break visually) ── */
+.section-eyebrow,
+.section-no {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+.italic-editorial { font-style: normal; }
+.rule { background-color: var(--rule); }
+.section-title { @apply text-3xl md:text-4xl font-semibold tracking-tight; }
