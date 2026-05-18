@@ -8,3 +8,7 @@ dist
 *.tsbuildinfo
 next-env.d.ts
 .DS_Store
+frontend-design/
+react-expert/
+gsap-skills/
+CLAUDE.md
