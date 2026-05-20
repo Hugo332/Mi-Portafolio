@@ -266,6 +266,27 @@ export const certifications: Certification[] = [
     date: { es: "Mayo 2026", en: "May 2026" },
     image: "/certificates/courses/curso-html.png",
   },
+  {
+    title: "CSS desde Cero",
+    issuer: "midudev",
+    issuerKey: "self",
+    date: { es: "20 Mayo 2026", en: "May 20, 2026" },
+    image: "/certificates/courses/curso-css.png",
+  },
+  {
+    title: "Utility Types en TypeScript",
+    issuer: "midudev",
+    issuerKey: "self",
+    date: { es: "20 Mayo 2026", en: "May 20, 2026" },
+    image: "/certificates/courses/curso-typescript.png",
+  },
+  {
+    title: "Claude Code in Action",
+    issuer: "Anthropic",
+    issuerKey: "self",
+    date: { es: "Mayo 2026", en: "May 2026" },
+    image: "/certificates/courses/certificado-claudecode.png",
+  },
 ];
 
 export const trainings: Training[] = [];
