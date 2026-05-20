@@ -224,6 +224,27 @@ main {
   will-change: opacity, transform;
 }
 
+/* ─────────────────────────────────────────────────────────────────────
+   Above-the-fold entrance — pre-hidden in CSS so the server-rendered
+   markup doesn't flash fully visible for a frame before GSAP takes over
+   on hydration (the "page appears static, then animates" flicker). GSAP
+   reveals these via autoAlpha; reduced-motion and no-JS users get them
+   shown instead (override below + the <noscript> block in layout.tsx).
+   ───────────────────────────────────────────────────────────────────── */
+.nav-brand,
+.nav-link,
+.hero-meta,
+.hero-status,
+.hero-char-name,
+.hero-build-line,
+.hero-tagline,
+.hero-rule,
+.hero-spec,
+.hero-cta > * {
+  opacity: 0;
+  visibility: hidden;
+}
+
 /* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -234,7 +255,17 @@ main {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal {
+  .reveal,
+  .nav-brand,
+  .nav-link,
+  .hero-meta,
+  .hero-status,
+  .hero-char-name,
+  .hero-build-line,
+  .hero-tagline,
+  .hero-rule,
+  .hero-spec,
+  .hero-cta > * {
     opacity: 1 !important;
     visibility: visible !important;
     transform: none !important;

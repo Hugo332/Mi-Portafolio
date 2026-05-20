@@ -150,6 +150,19 @@ export function Contact() {
               const email = String(data.get("email") ?? "");
               const message = String(data.get("message") ?? "");
 
+              // Last-resort fallback: open the user's mail client with the
+              // message pre-filled so it's never lost if the API can't send
+              // (missing key, send rejected, unverified domain, network error…).
+              const openMailto = () => {
+                const subject = encodeURIComponent(
+                  `Contacto desde portafolio — ${name}`
+                );
+                const body = encodeURIComponent(
+                  `Hola Hugo,\n\nMi nombre es ${name} (${email}).\n\n${message}`
+                );
+                window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
+              };
+
               try {
                 const res = await fetch("/api/contact", {
                   method: "POST",
@@ -161,21 +174,14 @@ export function Contact() {
                   form.reset();
                   return;
                 }
-                if (res.status === 503) {
-                  const subject = encodeURIComponent(
-                    `Contacto desde portafolio — ${name}`
-                  );
-                  const body = encodeURIComponent(
-                    `Hola Hugo,\n\nMi nombre es ${name} (${email}).\n\n${message}`
-                  );
-                  window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
-                  setStatus("fallback");
-                  form.reset();
-                  return;
-                }
-                setStatus("error");
+                // Any non-OK response → fall back to mailto instead of a
+                // dead-end "error" with no way to reach me.
+                openMailto();
+                setStatus("fallback");
+                form.reset();
               } catch {
-                setStatus("error");
+                openMailto();
+                setStatus("fallback");
               }
             }}
             className="contact-form col-span-12 md:col-span-7"

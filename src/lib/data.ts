@@ -41,16 +41,6 @@ export type Certification = {
   image?: string;
 };
 
-export type Project = {
-  title: string;
-  summary: Bi;
-  tags: string[];
-  href?: string;
-  repo?: string;
-  highlights: Bi<string[]>;
-  accent: string; // hex color for cover gradient
-};
-
 export type Language = { name: Bi; level: Bi };
 
 export type Training = Bi;
@@ -267,73 +257,14 @@ export const certifications: Certification[] = [
     issuer: "Formación autodidacta",
     issuerKey: "self",
     date: { es: "2025", en: "2025" },
-    image: "/certificates/courses/curso-gsap.pdf",
-  },
-];
-
-export const projects: Project[] = [
-  {
-    title: "Sistema de Gestión Clínica",
-    summary: {
-      es: "Plataforma web para registro de pacientes, historial clínico, agenda de citas y reportes para un centro de especialidades médicas.",
-      en: "Web platform for patient registration, clinical history, appointment scheduling and reports for a medical specialty center.",
-    },
-    tags: ["Laravel", "MySQL", "Bootstrap", "JavaScript"],
-    highlights: {
-      es: [
-        "Arquitectura MVC con principios SOLID",
-        "Roles y permisos por especialidad médica",
-        "Reportes PDF y exportación de historiales",
-      ],
-      en: [
-        "MVC architecture with SOLID principles",
-        "Role-based permissions per medical specialty",
-        "PDF reports and history exports",
-      ],
-    },
-    accent: "#EF4444",
+    image: "/certificates/courses/curso-gsap.png",
   },
   {
-    title: "App Móvil POOL",
-    summary: {
-      es: "Aplicación móvil multiplataforma con interfaz responsiva y consumo de APIs REST.",
-      en: "Cross-platform mobile application with a responsive interface and REST API integration.",
-    },
-    tags: ["Flutter", "Dart", "REST APIs"],
-    highlights: {
-      es: [
-        "UI responsiva optimizada para iOS y Android",
-        "Integración con APIs REST",
-        "Gestión de estado y navegación modular",
-      ],
-      en: [
-        "Responsive UI optimized for iOS and Android",
-        "REST API integration",
-        "Modular state and navigation management",
-      ],
-    },
-    accent: "#3B82F6",
-  },
-  {
-    title: "Portafolio Profesional",
-    summary: {
-      es: "Este sitio — One-Page construido con Next.js, TypeScript, Tailwind y animaciones GSAP profesionales.",
-      en: "This site — single-page portfolio built with Next.js, TypeScript, Tailwind and professional GSAP animations.",
-    },
-    tags: ["Next.js", "TypeScript", "GSAP", "Tailwind"],
-    highlights: {
-      es: [
-        "App Router + Server Components",
-        "Animaciones GSAP con cleanup automático",
-        "Bilingüe ES/EN y respeto a prefers-reduced-motion",
-      ],
-      en: [
-        "App Router + Server Components",
-        "GSAP animations with automatic cleanup",
-        "Bilingual ES/EN with prefers-reduced-motion support",
-      ],
-    },
-    accent: "#C9A84C",
+    title: "Curso de HTML desde Cero",
+    issuer: "Formación autodidacta",
+    issuerKey: "self",
+    date: { es: "Mayo 2026", en: "May 2026" },
+    image: "/certificates/courses/curso-html.png",
   },
 ];
 
@@ -385,13 +316,6 @@ export const ui = {
     eyebrow: { es: "Trayectoria", en: "Journey" },
     title: { es: "Experiencia profesional", en: "Professional experience" },
     subtitle: { es: "Proyectos donde he aportado al frontend, al backend y al ciclo completo de desarrollo.", en: "Projects where I've contributed to frontend, backend and the full development lifecycle." },
-  },
-  projects: {
-    eyebrow: { es: "Trabajos", en: "Work" },
-    title: { es: "Proyectos destacados", en: "Featured projects" },
-    subtitle: { es: "Una selección de los productos en los que he trabajado.", en: "A selection of products I've worked on." },
-    live: { es: "Ver demo", en: "Live demo" },
-    repo: { es: "Código", en: "Code" },
   },
   skills: {
     eyebrow: { es: "Stack", en: "Stack" },

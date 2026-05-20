@@ -116,6 +116,11 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
+        {/* If JS is disabled, GSAP never runs — reveal the pre-hidden
+            above-the-fold elements so the page isn't blank. */}
+        <noscript>
+          <style>{`.reveal,.nav-brand,.nav-link,.hero-meta,.hero-status,.hero-char-name,.hero-build-line,.hero-tagline,.hero-rule,.hero-spec,.hero-cta>*{opacity:1!important;visibility:visible!important;transform:none!important}`}</style>
+        </noscript>
       </head>
       <body className="bg-surface text-fg font-sans antialiased">
         <a

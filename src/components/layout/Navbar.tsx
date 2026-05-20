@@ -71,9 +71,16 @@ export function Navbar() {
     () => {
       if (prefersReducedMotion()) return;
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.from(".nav-brand", { opacity: 0, y: -12, duration: 0.5 }).from(
+      // fromTo (not from): the brand + links are pre-hidden in CSS to avoid an
+      // SSR flash, so we need an explicit visible end state to animate toward.
+      tl.fromTo(
+        ".nav-brand",
+        { autoAlpha: 0, y: -12 },
+        { autoAlpha: 1, y: 0, duration: 0.5 }
+      ).fromTo(
         ".nav-link",
-        { opacity: 0, y: -10, stagger: 0.05, duration: 0.4 },
+        { autoAlpha: 0, y: -10 },
+        { autoAlpha: 1, y: 0, stagger: 0.05, duration: 0.4 },
         "-=0.25"
       );
     },
